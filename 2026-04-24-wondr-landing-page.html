@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wondr — Experiential Design & Events</title>
+  <meta name="description" content="wondr designs and manages events that matter. 0% vendor markup. Values-aligned." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #fafafa;
+      --gray: #888;
+      --light: #f2f2f0;
+      --accent: #0e0e0e;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(250, 250, 250, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e8e8e6;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--black);
+      padding: 9px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.8; }
+
+    /* --- HERO --- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 48px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--gray);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 480px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--black);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.75; }
+
+    .btn-ghost {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      background: transparent;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: 1.5px solid #d8d8d4;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--black); }
+
+    /* --- STATS --- */
+    #stats {
+      background: var(--light);
+      padding: 72px 48px;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .stat {
+      padding: 32px;
+      background: var(--white);
+      border-radius: 12px;
+    }
+
+    .stat-number {
+      font-size: 52px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    /* --- WHAT WE DO --- */
+    #services {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 56px;
+      max-width: 640px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: #e8e8e6;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 36px 32px;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover { background: var(--light); }
+
+    .service-icon {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* --- DIFFERENTIATOR --- */
+    #difference {
+      background: var(--black);
+      color: var(--white);
+      padding: 100px 48px;
+    }
+
+    .diff-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    #difference .section-label { color: #666; }
+
+    #difference h2 {
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    #difference p {
+      color: #aaa;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .diff-highlight {
+      font-size: 15px;
+      color: #aaa;
+      border-top: 1px solid #2a2a2a;
+      padding-top: 24px;
+      margin-top: 8px;
+    }
+
+    .diff-highlight strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .diff-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .diff-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .diff-row.them {
+      background: #1a1a1a;
+      color: #666;
+    }
+
+    .diff-row.us {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .diff-row .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .diff-row.them .tag {
+      background: #2a2a2a;
+      color: #555;
+    }
+
+    .diff-row.us .tag {
+      background: var(--light);
+      color: var(--black);
+    }
+
+    /* --- PRICING --- */
+    #pricing {
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .pricing-card {
+      border: 1.5px solid #e8e8e6;
+      border-radius: 16px;
+      padding: 48px 40px;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    .pricing-tier {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--gray);
+    }
+
+    .pricing-card.featured .pricing-tier { color: #666; }
+
+    .pricing-rate {
+      font-size: 64px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .pricing-base {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    .pricing-card.featured .pricing-base { color: #666; }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pricing-features li {
+      font-size: 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      font-size: 13px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .pricing-features li { color: #444; }
+    .pricing-card.featured .pricing-features li { color: #ccc; }
+
+    /* --- CONTACT --- */
+    #contact {
+      background: var(--light);
+      padding: 100px 48px;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #contact .section-label { justify-content: center; display: block; text-align: center; }
+
+    #contact h2 {
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+
+    #contact p {
+      font-size: 17px;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .contact-email:hover { opacity: 0.5; }
+
+    /* --- FOOTER --- */
+    footer {
+      padding: 36px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e8e8e6;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    footer a {
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--black); }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 120px 24px 60px; }
+      #stats, #services, #pricing, #contact, #difference { padding: 64px 24px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .diff-inner { grid-template-columns: 1fr; gap: 48px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">wondr</a>
+    <ul class="nav-links">
+      <li><a href="#services">What we do</a></li>
+      <li><a href="#difference">Why wondr</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-label">Experiential Design & Events</p>
+    <h1>We create spaces where <em>meaningful things happen.</em></h1>
+    <p class="hero-sub">wondr is an events management agency for organizations that care — about quality, ethics, and impact.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contact">Work with us</a>
+      <a class="btn-ghost" href="#services">See what we do</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Events managed end-to-end</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Startups accelerated globally</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">80+</div>
+        <div class="stat-label">Events attended worldwide</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">What we do</p>
+    <h2>Every format. One standard of execution.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🏛</div>
+        <h3>Conferences & Summits</h3>
+        <p>Full-scale corporate conferences and summits, from intimate leadership gatherings to large-scale multi-day programs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏆</div>
+        <h3>Galas & Award Ceremonies</h3>
+        <p>Formal celebrations designed to honor achievement and leave a lasting impression on every guest in the room.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3>Community Convenings</h3>
+        <p>Networking dinners, founder meetups, and industry convenings that build real relationships — not just business cards.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Product Launches</h3>
+        <p>Brand activations and product launches crafted to make people feel the product before they ever use it.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>Hackathons & Pitch Competitions</h3>
+        <p>High-energy, fast-moving formats where logistics have to be invisible so the ideas can take center stage.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <h3>Team Retreats & Offsites</h3>
+        <p>Intentional off-site experiences that reset culture, align leadership, and give teams something worth coming back from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATOR -->
+  <section id="difference">
+    <div class="diff-inner">
+      <div>
+        <p class="section-label">Why wondr</p>
+        <h2>We don't earn a cent from your vendors.</h2>
+        <p>Most agencies mark up vendor invoices 10–15% and call it a service fee. You pay inflated prices; they pocket the difference without you knowing.</p>
+        <p>wondr charges a transparent management fee and nothing else. Vendors invoice you directly at their actual rates. Our incentive is always your event — not the invoice.</p>
+        <div class="diff-highlight"><strong>Values filter:</strong> We only work with organizations whose purpose aligns with ours. No alcohol-driven events, no defense tech, no compromises.</div>
+      </div>
+      <div class="diff-visual">
+        <div class="diff-row them">
+          <span>Typical agency</span>
+          <span class="tag">10–15% vendor markup</span>
+        </div>
+        <div class="diff-row them">
+          <span>Hidden fees in invoices</span>
+          <span class="tag">Standard</span>
+        </div>
+        <div class="diff-row them">
+          <span>Vendor loyalty to agency</span>
+          <span class="tag">Conflict of interest</span>
+        </div>
+        <div class="diff-row us">
+          <span>wondr</span>
+          <span class="tag">0% vendor markup</span>
+        </div>
+        <div class="diff-row us">
+          <span>Direct vendor invoicing</span>
+          <span class="tag">Transparent</span>
+        </div>
+        <div class="diff-row us">
+          <span>Management fee only</span>
+          <span class="tag">Aligned incentives</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <p class="section-label">Pricing</p>
+    <h2>Simple, percentage-based. No surprises.</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">Core</div>
+        <div class="pricing-rate">20%</div>
+        <div class="pricing-base">of total event budget</div>
+        <ul class="pricing-features">
+          <li>Event strategy & concept design</li>
+          <li>Full logistics & operations</li>
+          <li>Vendor sourcing & management (0% markup)</li>
+          <li>On-site execution</li>
+          <li>Client communication throughout</li>
+          <li>Post-event reporting</li>
+          <li>Bespoke music compositions (up to 3)</li>
+          <li>Original teaser video</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Premium</div>
+        <div class="pricing-rate">30%</div>
+        <div class="pricing-base">of total event budget</div>
+        <ul class="pricing-features">
+          <li>Everything in Core</li>
+          <li>Immersive experience design</li>
+          <li>Personalized gifting</li>
+          <li>Career fair integration</li>
+          <li>Cultural programming</li>
+          <li>Custom branding & theming</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get in touch</p>
+      <h2>Let's build something worth remembering.</h2>
+      <p>Tell us what you're planning. We'll tell you honestly whether we're the right fit.</p>
+      <a class="contact-email" href="mailto:info@madebywondr.com">info@madebywondr.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 wondr. All rights reserved.</span>
+    <a href="https://www.madebywondr.com">madebywondr.com</a>
+  </footer>
+
+</body>
+</html>
